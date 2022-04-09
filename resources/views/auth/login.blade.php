@@ -10,13 +10,13 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">email</label>
+                         <div class="form-group row">
+                            <label for="identify" class="col-md-4 col-form-label text-md-right">Email or phone</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required  >
+                                <input id="identify" type="identify" class="form-control @error('identify') is-invalid @enderror" name="identify" value="{{ old('identify') }}" required  >
 
-                                @error('email')
+                                @error('identify')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -24,19 +24,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="mobile" class="col-md-4 col-form-label text-md-right">mobile</label>
+{{--                        <div class="form-group row">--}}
+{{--                            <label for="email" class="col-md-4 col-form-label text-md-right">Email or Mobile</label>--}}
 
-                            <div class="col-md-6">
-                                <input id="mobile" type="mobile" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required  >
+{{--                            <div class="col-md-6">--}}
+{{--                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required  >--}}
 
-                                @error('mobile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+{{--                                @error('email')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

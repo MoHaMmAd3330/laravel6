@@ -1,5 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+
 //Code Terminal
 //php artisan serve
 //php artisan  make:controller FirstController
@@ -64,7 +67,26 @@ Route::get('home','Front\UserController@gethome');
 
 
 
-
 Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home') -> middleware('verified');
+
+
+
+Route::get('/redirect/{service}','SocialiteController@redirect');
+Route::get('/callback/{service}','SocialiteController@callback');
+
+
+Route::get('fillable','CrudController@getOffers');
+Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function() {
+
+    Route::group(['prefix' => 'offers'],function (){
+//   Route::get('store','CrudController@store');
+        Route::get('create', 'CrudController@create');
+        Route::post('store', 'CrudController@store')->name('offers.store');
+
+
+});
+
+
+});
