@@ -21,8 +21,11 @@
                 margin: 0;
             }
 
+            h1 {
+                margin-top: 7%;
+            }
             .full-height {
-                height: 100vh;
+                height: 75vh;
             }
 
             .flex-center {
@@ -84,14 +87,16 @@
                     @endforeach
 
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
 {{--    ///////--}}
+
+    <div class="content">
+        <h1>{{__('messages.offer h1')}}</h1>
+    </div>
+
+
     <div class="flex-center position-ref full-height">
 
         <div class="content">
@@ -103,30 +108,47 @@
             <form class="row g-3" method="post" action="{{route('offers.store')}}">
                     @csrf {{--<input name="_token" value="{{csrf_token()}}--}}
                     <div class="col-12">
-                        <label for="inputaddress" class="form-label">offer name</label>
-                        <input type="text" class="form-control"  name="name" placeholder="enter email">
-                        @error('name')
+                        <label for="inputaddress" class="form-label">{{__('messages.offer name ar')}}</label>
+                        <input type="text" class="form-control"  name="name_ar" placeholder="{{__('messages.enter email')}}">
+                        @error('name_ar')
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
 
                     </div>
+                <div class="col-12">
+                    <label for="inputaddress" class="form-label">{{__('messages.offer name en')}}</label>
+                    <input type="text" class="form-control"  name="name_en" placeholder="{{__('messages.enter email')}}">
+                    @error('name_en')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror
+
+                </div>
                     <div class="col-12">
-                        <label for="inputaddress2" class="form-label">offer price </label>
-                        <input type="text" class="form-control" name="price" placeholder="price">
+                        <label for="inputaddress2" class="form-label">{{__('messages.offer price')}} </label>
+                        <input type="text" class="form-control" name="price" placeholder="{{__('messages.enter price')}}">
                         @error('price')
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
 
                     </div>
+
+                <div class="col-md-12">
+                    <label for="inputcity" class="form-label">{{__('messages.offer details ar')}}</label>
+                    <input type="text" class="form-control" name="details_ar" placeholder="{{__('messages.enter details')}}">
+                    @error('details_ar')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror
+                </div>
                     <div class="col-md-12">
-                        <label for="inputcity" class="form-label">offers details</label>
-                        <input type="text" class="form-control" name="details" placeholder="details">
-                        @error('details')
-                        <small class="form-text text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
+                            <label for="inputcity" class="form-label">{{__('messages.offer details en')}}</label>
+                            <input type="text" class="form-control" name="details_en" placeholder="{{__('messages.enter details')}}">
+                            @error('details_en')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">save offer</button>
+                        <button type="submit" class="btn btn-primary">{{__('messages.offer save')}}</button>
                     </div>
                 </form>
         </div>
