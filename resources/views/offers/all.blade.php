@@ -61,6 +61,10 @@
         .m-b-md {
             margin-bottom: 30px;
         }
+
+        a{
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -68,33 +72,36 @@
 <nav class="navbar navbar-expand navbar-light ">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                 <li class="nav-item active">
                     <a class="nav-link text-center"
-                       href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"> {{ $properties['native'] }}
-                        <span class="sr-only">(current)</span></a>
+                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"> {{ $properties['native'] }}
+                    <span class="sr-only">(current)</span></a>
+
+                    @endforeach
+
                 </li>
-            @endforeach
-
-
+                <a class="btn btn-success text-center " href="{{ url('offers/create') }}">
+                    {{__('messages.offer create')}}</a>
         </ul>
+
 
     </div>
 </nav>
 
 
-@if(Session::has('success'))
+{{--@if(Session::has('success'))--}}
 
-    <div class="alert alert-success">
-        {{Session::get('success')}}
-    </div>
-@endif
+{{--    <div class="alert alert-success">--}}
+{{--        {{Session::get('success')}}--}}
+{{--    </div>--}}
+{{--@endif--}}
 
 
 @if(Session::has('error'))
@@ -107,15 +114,17 @@
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">{{__('messages.offer name ar')}}</th>
+        <th scope="col">{{__('messages.offer name all')}}</th>
 {{--        <th scope="col">{{__('messages.offer name en')}}</th>--}}
         <th scope="col">{{__('messages.offer price')}}</th>
 {{--        <th scope="col">{{__('messages.offer details ar')}}</th>--}}
-        <th scope="col">{{__('messages.offer details ar')}}</th>
+        <th scope="col">{{__('messages.offer details all')}}</th>
+        <th scope="col">{{__('messages.offer photo')}}</th>
+        <th scope="col">{{__('messages.created at')}}</th>
+        <th scope="col">{{__('messages.updated at')}}</th>
+        <th class="content" scope="col">{{__('messages.operation')}}</th>
 
-        {{--        <th scope="col">صوره العرض</th>--}}
 
-{{--        <th scope="col">{{__('messages.operation')}}</th>--}}
     </tr>
     </thead>
     <tbody>
@@ -127,11 +136,16 @@
             <td>{{$offer -> name}}</td>
             <td>{{$offer -> price}}</td>
             <td>{{$offer -> details}}</td>
+            <td><img  style="width: 100px; height: 100px;" src="{{asset('images/offers/'.$offer->photo)}}"></td>
             <td>{{$offer -> created_at}}</td>
             <td>{{$offer -> updated_at}}</td>
 
+                <td class="content"><a href="{{url('offers/edit/' .$offer->id)}}" class="btn btn-success">{{__('messages.update')}}</a>
+                                    <a href="{{url('offers/delete/' .$offer->id)}}" class="btn btn-danger">{{__('messages.delete')}}</a>
+                </td>
 
-            {{--            <td><img  style="width: 90px; height: 90px;" src="{{asset('images/offers/'.$offer->photo)}}"></td>--}}
+
+
 
             <td>
 {{--                <a href="{{url('offers/edit/'.$offer -> id)}}" class="btn btn-success"> {{__('messages.update')}}</a>--}}

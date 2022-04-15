@@ -68,33 +68,35 @@
         </style>
     </head>
     <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+    <nav class="navbar navbar-expand navbar-light ">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">  {{ $properties['native'] }}</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    <li class="nav-item active">
+                        <a class="nav-link text-center"
+                           href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"> {{ $properties['native'] }}
+                            <span class="sr-only"></span></a>
                     </li>
-                    @endforeach
-                    <a class="nav-link text-center " href="{{ url('offers/all') }}">
-                        {{__('messages.offer all')}}</a>
-                </ul>
-            </div>
+                @endforeach
+            </ul>
+            <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-center" href="{{ url('offers/all') }}">
+                            <span class="sr-only">{{__('messages.offer all')}}</span></a>
+                    </li>
+            </ul>
         </div>
     </nav>
 {{--    ///////--}}
 
     <div class="content">
-        <h1>{{__('messages.offer h1')}}</h1>
+        <h1>{{__('messages.offer h1 all')}}</h1>
     </div>
 
 
@@ -106,11 +108,12 @@
                     {{Session::get('success')}}
                 </div>
             @endif
-            <form class="row g-3" method="post" action="{{route('offers.store')}}" enctype="multipart/form-data">
+            <form class="row g-3" method="post" action="{{route('offers.update', $offer -> id)}}">
                     @csrf {{--<input name="_token" value="{{csrf_token()}}--}}
+
                 <div class="col-12">
-                    <label for="inputaddress" class="form-label">{{__('messages.enter photo')}}</label>
-                    <input type="file" class="form-control"  name="photo"  placeholder="{{__('messages.enter photo')}}">
+                    <label for="inputaddress" class="form-label">photo</label>
+                    <input type="file" class="form-control"  name="photo" value="{{$offer -> photo}}" placeholder="{{__('messages.enter email')}}">
                     @error('photo')
                     <small class="form-text text-danger">{{$message}}</small>
                     @enderror
@@ -119,7 +122,7 @@
 
                     <div class="col-12">
                         <label for="inputaddress" class="form-label">{{__('messages.offer name ar')}}</label>
-                        <input type="text" class="form-control"  name="name_ar" placeholder="{{__('messages.enter email')}}">
+                        <input type="text" class="form-control"  name="name_ar" value="{{$offer -> name_ar}}" placeholder="{{__('messages.enter email')}}">
                         @error('name_ar')
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -127,7 +130,7 @@
                     </div>
                 <div class="col-12">
                     <label for="inputaddress" class="form-label">{{__('messages.offer name en')}}</label>
-                    <input type="text" class="form-control"  name="name_en" placeholder="{{__('messages.enter email')}}">
+                    <input type="text" class="form-control"  name="name_en" value="{{$offer -> name_en}}" placeholder="{{__('messages.enter email')}}">
                     @error('name_en')
                     <small class="form-text text-danger">{{$message}}</small>
                     @enderror
@@ -135,7 +138,7 @@
                 </div>
                     <div class="col-12">
                         <label for="inputaddress2" class="form-label">{{__('messages.offer price')}} </label>
-                        <input type="text" class="form-control" name="price" placeholder="{{__('messages.enter price')}}">
+                        <input type="text" class="form-control" name="price" value="{{$offer -> price}}" placeholder="{{__('messages.enter price')}}">
                         @error('price')
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -144,14 +147,14 @@
 
                 <div class="col-md-12">
                     <label for="inputcity" class="form-label">{{__('messages.offer details ar')}}</label>
-                    <input type="text" class="form-control" name="details_ar" placeholder="{{__('messages.enter details')}}">
+                    <input type="text" class="form-control" name="details_ar" value="{{$offer -> details_ar}}" placeholder="{{__('messages.enter details')}}">
                     @error('details_ar')
                     <small class="form-text text-danger">{{$message}}</small>
                     @enderror
                 </div>
                     <div class="col-md-12">
                             <label for="inputcity" class="form-label">{{__('messages.offer details en')}}</label>
-                            <input type="text" class="form-control" name="details_en" placeholder="{{__('messages.enter details')}}">
+                            <input type="text" class="form-control" name="details_en" value="{{$offer -> details_en}}" placeholder="{{__('messages.enter details')}}">
                             @error('details_en')
                             <small class="form-text text-danger">{{$message}}</small>
                             @enderror
