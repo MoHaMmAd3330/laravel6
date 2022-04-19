@@ -42,5 +42,6 @@ return [
     'offer delete'=>'Offer delete',
     'offer create'=>'Offer Create',
     'offer all'=>'Offer all',
-    'enter photo'=>'Enter photo'
+    'enter photo'=>'Enter photo',
+    'delete ajax'=>'Delete ajax'
 ];

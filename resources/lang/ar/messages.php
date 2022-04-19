@@ -15,7 +15,7 @@ return [
 
     'offer name required'=> 'اسم العرض مطلوب',
     'offer name must be unique'=>' الاسم موجود',
-    'offer price must be required'=>'اسم العرض مطلوب ',
+    'offer price must be required'=>' السعر مطلوب ',
     'offer price must be unique'=>'السعر موجود',
     'offer price must be numeric'=>'يجب ان يكون سعر العرض ارقام',
     'offer details must be required'=>'يجب ان تكون التفاصيل موجودة',
@@ -42,6 +42,7 @@ return [
     'offer delete'=>'تم حذف العرض',
     'offer create'=>'اضافة عرض جديد',
     'offer all'=>'صفخة العروض',
-    'enter photo'=>'ادخل الصورة'
+    'enter photo'=>'ادخل الصورة',
+    'delete ajax'=> 'حذف بل اجاكس'
 
 ];

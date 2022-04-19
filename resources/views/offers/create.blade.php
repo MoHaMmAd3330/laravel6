@@ -68,8 +68,8 @@
         </style>
     </head>
     <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="container">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -100,7 +100,7 @@
 
     <div class="flex-center position-ref full-height">
 
-        <div class="content">
+        <div class="container text-center">
             @if(Session::has('success'))
                 <div class="alert alert-success text-center" role="alert">
                     {{Session::get('success')}}

@@ -68,7 +68,7 @@
         </style>
     </head>
     <body>
-    <nav class="navbar navbar-expand navbar-light ">
+    <nav class="container navbar navbar-expand navbar-light ">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,7 @@
         </div>
     </nav>
 {{--    ///////--}}
-
+<div class="container text-center">
     <div class="content">
         <h1>{{__('messages.offer h1 all')}}</h1>
     </div>

@@ -38,7 +38,7 @@ class CrudController extends Controller
             return view('offers.create');
 }
 
-public function store(OfferRequest $request)
+public function store(Request $request)
 {
 //
 //    $rules = $this -> getrules();
@@ -52,12 +52,12 @@ public function store(OfferRequest $request)
 //    }
 
 
-    $file_name = $this -> saveImage($request ->photo,'images/offer');
+//    $file_name = $this -> saveImage($request ->photo,'images/offer');
 
 
 
     Offer::create([
-        'photo'  => $file_name,
+//        'photo'  => $file_name,
         'name_ar'=> $request->name_ar,
         'name_en'=> $request->name_en,
         'price'  => $request->price,
@@ -102,9 +102,9 @@ public function store(OfferRequest $request)
     public function delete($offer_id){
        $offer = Offer::find($offer_id);
         if (!$offer)
-            return redirect()->back()->with(['success'=>__('messages.offer delete')]);
+            return redirect()->back()->with(['error'=>__('messages.offer not exist')]);
         $offer -> delete();
-        return redirect()->route('offers.delete',$offer_id)->with(['error'=>__('messages.offer not exist')]);
+        return redirect()->route('offers.all')->with(['success'=>__('messages.offer delete')]);
     }
 public function updateOffer(OfferRequest $request , $offer_id){
     //update date

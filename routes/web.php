@@ -82,13 +82,41 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::group(['prefix' => 'offers'],function (){
 //   Route::get('store','CrudController@store');
-        Route::get('create', 'CrudController@create');
+        Route::get('create', 'CrudController@create')-> middleware('auth');
         Route::post('store', 'CrudController@store')->name('offers.store');
-        Route::get('edit/{offer_id}', 'CrudController@EditOffer');
-        Route::post('update/{offer_id}', 'CrudController@updateOffer')->name('offers.update');
-        Route::get('delete/{offer_id}', 'CrudController@delete')->name('offers.delete');
-        Route::get('all', 'CrudController@getAllOffers')->name('offers.all');
+        Route::get('edit/{offer_id}', 'CrudController@EditOffer')-> middleware('auth');
+        Route::post('update/{offer_id}', 'CrudController@updateOffer')->name('offers.update')-> middleware('auth');
+        Route::get('delete/{offer_id}', 'CrudController@delete')->name('offers.delete')-> middleware('auth');
+        Route::get('all', 'CrudController@getAllOffers')->name('offers.all')-> middleware('auth');
 });
     Route::get('youtube','CrudController@getVideo')-> middleware('auth');
 
 });
+
+
+
+
+
+
+########################## begin Ajax Routes #################
+Route::group(['prefix'=>'ajax-offers'],function (){
+    Route::get('create','OfferController@create');
+    Route::post('store','OfferController@store')->name('ajax.offers.store');
+    Route::get('all','OfferController@all')->name('ajax.offers.all');
+    Route::post('delete', 'OfferController@delete')->name('ajax.offers.delete');
+    Route::get('edit/{offer_id}', 'OfferController@edit')->name('ajax.offers.edit');
+    Route::post('update', 'OfferController@update')->name('ajax.offers.update');
+});
+
+########################## End Ajax Routes #################
+
+
+########################## Authentication && Guards ########
+Route::group(['middleware'=>'Check','namespace'=>'Auth'],function (){
+    Route::get('adults','CustomAuthController@adult')->name('adult');
+
+});
+Route::get('site','Auth\CustomAuthController@site')->name('site')-> middleware('auth:web');
+Route::get('admin','Auth\CustomAuthController@admin')->name('admin')-> middleware('auth:admin');
+
+########################## End Authentication && Guards  ########
