@@ -108,15 +108,19 @@ Route::group(['prefix'=>'ajax-offers'],function (){
     Route::post('update', 'OfferController@update')->name('ajax.offers.update');
 });
 
-########################## End Ajax Routes #################
+    ########################## End Ajax Routes #################
 
 
-########################## Authentication && Guards ########
-Route::group(['middleware'=>'Check','namespace'=>'Auth'],function (){
-    Route::get('adults','CustomAuthController@adult')->name('adult');
+    ########################## Authentication && Guards ##########
+    Route::group(['middleware'=>'Check','namespace'=>'Auth'],function (){
+        Route::get('adults','CustomAuthController@adult')->name('adult');
 
-});
-Route::get('site','Auth\CustomAuthController@site')->name('site')-> middleware('auth:web');
-Route::get('admin','Auth\CustomAuthController@admin')->name('admin')-> middleware('auth:admin');
+    });
+    Route::get('site','Auth\CustomAuthController@site')->name('site')-> middleware('auth:web');
+    Route::get('admin','Auth\CustomAuthController@admin')->name('admin')-> middleware('auth:admin');
 
-########################## End Authentication && Guards  ########
+    Route::get('admin/login','Auth\CustomAuthController@adminlogin')->name('admin.login');
+    Route::post('Admin/login','Auth\CustomAuthController@checkAdminLogin')->name('save.admin.login');
+
+
+    ########################## End Authentication && Guards  ########

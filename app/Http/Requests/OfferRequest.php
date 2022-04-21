@@ -25,6 +25,8 @@ class OfferRequest extends FormRequest
     {
         return $rules =  [
             'name_ar'=>'required|max:100|unique:offers,name_ar',
+            'email' => 'required|max:100',
+            'password' => 'required|min:6',
             'name_en'=>'required|max:100|unique:offers,name_en',
             'price'  =>'required|numeric',
             'photo'=> 'required',

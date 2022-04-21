@@ -4,14 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class admin extends Model
+class Admin extends model
 {
-    protected $table = "admins";
-    protected $fillable=['name','email','password',];
+    protected $table = "admin";
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
 //    protected $hidden=['created_at','updated_at'];
 //    public $timestamps = false;
 ////
 ////// turn off only updated_at
 //    const UPDATED_AT = false;
+
+//protected $hidden = [
+//    'password',
+//];
+
+protected $guard = "admin";
 }
