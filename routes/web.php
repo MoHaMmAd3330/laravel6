@@ -117,10 +117,39 @@ Route::group(['prefix'=>'ajax-offers'],function (){
 
     });
     Route::get('site','Auth\CustomAuthController@site')->name('site')-> middleware('auth:web');
-    Route::get('admin','Auth\CustomAuthController@admin')->name('admin')-> middleware('auth:admin');
-
+    Route::get('Admin','Auth\CustomAuthController@admin')->name('admin')-> middleware('auth:admin');
+    Route::get('admin','Auth\CustomAuthController@Adminlog')->name('admin.login');
     Route::get('admin/login','Auth\CustomAuthController@adminlogin')->name('admin.login');
     Route::post('Admin/login','Auth\CustomAuthController@checkAdminLogin')->name('save.admin.login');
 
-
     ########################## End Authentication && Guards  ########
+
+
+######################### begin One To One relations #############################
+Route::get('has-one','Relation\RelationsController@hasOneRelations');
+
+Route::get('has-one-reserve','Relation\RelationsController@hasOneRelationsReserve');
+
+Route::get('get-user-has-phone','Relation\RelationsController@getUserHasPhone');
+
+Route::get('get-user-not-has-phone','Relation\RelationsController@getUserNotHasPhone');
+
+######################### end One To One relations #############################
+
+######################### begin One To many relations #############################
+Route::get('hospital-has-many','Relation\RelationsController@getHospitalDoctors');
+Route::get('hospitals','Relation\RelationsController@hospitals')->name('hospitals.all');
+Route::get('doctors/{hospital_id}','Relation\RelationsController@doctors')->name('hospital.doctors');
+Route::get('hospitals/{hospitals_id}','Relation\RelationsController@delete')->name('hospital.delete');
+Route::get('doctors-services','Relation\RelationsController@getDoctorServicers');
+Route::get('services-doctors','Relation\RelationsController@getServicersDoctor');
+Route::get('doctors/services/{doctor_id}','Relation\RelationsController@getdoctorsServicersbyeid')->name('doctors.services');
+Route::post('saveServices-to-doctor','Relation\RelationsController@saveServicesTodoctor')->name('save.Services');
+
+######################### end One To many relations #############################
+
+
+######################### has One through #############################
+Route::get('has-one-through','Relation\RelationsController@getpatientDoctor');
+
+######################### end has One through#############################
