@@ -151,5 +151,9 @@ Route::post('saveServices-to-doctor','Relation\RelationsController@saveServicesT
 
 ######################### has One through #############################
 Route::get('has-one-through','Relation\RelationsController@getpatientDoctor');
+Route::get('has-many-through','Relation\RelationsController@getCountryDoctor');
+Route::get('Countrie-Hospital/','Relation\RelationsController@getCountrieHospital');
+Route::get('Hospital-doctors/{hospital_id}','Relation\RelationsController@getHospitalsDoctors')->name('Hospital-doctors');
+Route::get('Hospital-delete/{hospital_id}','Relation\RelationsController@getHospitalsDoctorsdelete')->name('hospitalDoctors.delete');
 
 ######################### end has One through#############################

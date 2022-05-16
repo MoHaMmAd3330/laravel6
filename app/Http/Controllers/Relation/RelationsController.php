@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Relation;
 
 use App\Http\Controllers\Controller;
+use App\Models\Countrie;
 use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Patient;
@@ -49,8 +50,8 @@ class RelationsController extends Controller
                 foreach ($doctor as $doctors){
                    echo $doctors -> name."<br>";
         }
-               $doctor = Doctor::find(3);
-              return $doctor -> hospital;
+                $doctor = Doctor::find(3);
+               return  $doctor -> hospital;
            }
         public function hospitals(){
             $hospitals =  Hospital::select('id','name','address')->get();
@@ -70,7 +71,7 @@ class RelationsController extends Controller
                 return abort('404');
             $hospital -> doctors() -> delete();
             $hospital -> delete();
-            return redirect()->route('hospitals.all');
+            return redirect()->back();
 
         }
         public function getDoctorServicers(){
@@ -109,4 +110,26 @@ class RelationsController extends Controller
         $patient = Patient::find(1);
          return   $patient -> doctor;
         }
+
+        public function getCountryDoctor(){
+             $countri = Countrie::select('id','name')->find(1);
+                $countri -> doctors;
+            return compact('countri');
+        }
+        public function getCountrieHospital(){
+             $countries = Countrie::select('id','name')->get();
+            return view('doctors.Countriehospitals',compact('countries'));
+        }
+        public function getHospitalsDoctors($hospital_id){
+               $countrie = Countrie::find($hospital_id);
+             $countries = $countrie -> hospitals;
+            return view('doctors.hospitalsDoctors',compact('countries'));
+        }
+
+//        public function getHospitalsDoctorsdelete($hospital_id){
+//            $deletes = Countrie::find($hospital_id);
+//             $deletes -> hospitals()->delete();
+//                return redirect()->route('Hospital-doctors');
+//
+//        }
 }
